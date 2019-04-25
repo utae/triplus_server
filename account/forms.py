@@ -1,12 +1,12 @@
 from django import forms
-from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.files.images import get_image_dimensions
 from django.utils.translation import ugettext_lazy as _
 
 from .models import User, UserManager
 
 
-class UserCreationForm(UserCreationForm):
+class UserCreationForm(forms.ModelForm):
     # 사용자 생성 폼
     email = forms.EmailField(
         label=_('Email'),
