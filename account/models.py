@@ -2,7 +2,6 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, PermissionsMixin
 )
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -41,31 +40,31 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
-        verbose_name=_('Email'),
+        verbose_name=_('이메일'),
         max_length=191,
         unique=True,
     )
     username = models.CharField(
-        verbose_name=_('User name'),
-        max_length=30
+        verbose_name=_('이름'),
+        max_length=30,
     )
     is_active = models.BooleanField(
-        verbose_name=_('Is active'),
-        default=True
+        verbose_name=_('활성'),
+        default=True,
     )
     is_admin = models.BooleanField(
-        verbose_name=_('Is admin'),
-        default=False
+        verbose_name=_('관리자'),
+        default=False,
     )
     date_joined = models.DateTimeField(
-        verbose_name=_('Date joined'),
-        default=timezone.now
+        verbose_name=_('가입시간'),
+        auto_now_add=True,
     )
     profile_img = models.ImageField(
-        verbose_name=_('Profile Image'),
+        verbose_name=_('프로필 사진'),
         null=True,
         blank=True,
-        upload_to='image/profile_img'
+        upload_to='image/profile_img',
     )
     # # 이 필드는 레거시 시스템 호환을 위해 추가할 수도 있다.
     # salt = models.CharField(
