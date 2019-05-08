@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'account',
     'trip_info',
+    'hash_tag',
 ]
 
 MIDDLEWARE = [
