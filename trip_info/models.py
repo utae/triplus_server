@@ -5,6 +5,14 @@ from django.utils.translation import ugettext_lazy as _
 from hash_tag.models import HashTag
 
 
+def trip_info_img_path(instance, filename):
+    return 'image/trip_info/{id}/{filename}'.format(id=instance.id, filename=filename)
+
+
+def trip_info_detail_img_path(instance, filename):
+    return 'image/trip_info/{trip_info_id}/{filename}'.format(trip_info_id=instance.trip_info.id, filename=filename)
+
+
 class TripInfo(models.Model):
 
     title = models.CharField(
@@ -34,6 +42,7 @@ class TripInfo(models.Model):
 
     main_img = models.ImageField(
         verbose_name=_('메인 이미지'),
+        upload_to=trip_info_img_path,
     )
 
     like_user_set = models.ManyToManyField(
@@ -55,6 +64,14 @@ class TripInfo(models.Model):
         verbose_name=_('해시 태그'),
     )
 
+    def save(self, *args, **kwargs):
+        if self.id is None and self.main_img is not None:
+            temp_image = self.main_img
+            self.main_img = None
+            super().save(*args, **kwargs)
+            self.main_img = temp_image
+        super().save(*args, **kwargs)
+
 
 class TripInfoDetail(models.Model):
 
@@ -70,6 +87,7 @@ class TripInfoDetail(models.Model):
 
     image = models.ImageField(
         verbose_name=_('이미지'),
+        upload_to=trip_info_detail_img_path,
     )
 
 

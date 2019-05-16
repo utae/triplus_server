@@ -5,6 +5,10 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+def user_profile_img_path(instance, filename):
+    return 'image/profile/{id}/{filename}'.format(id=instance.id, filename=filename)
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
         """
@@ -64,7 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_('프로필 사진'),
         null=True,
         blank=True,
-        upload_to='image/profile_img',
+        upload_to=user_profile_img_path,
     )
     # # 이 필드는 레거시 시스템 호환을 위해 추가할 수도 있다.
     # salt = models.CharField(
@@ -77,6 +81,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', ]
+
+    def save(self, *args, **kwargs):
+        if self.id is None and self.profile_img is not None:
+            temp_image = self.profile_img
+            self.profile_img = None
+            super().save(*args, **kwargs)
+            self.profile_img = temp_image
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = _('user')

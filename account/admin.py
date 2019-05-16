@@ -19,9 +19,8 @@ class UserAdmin(BaseUserAdmin):
     list_display_links = ('email',)
     list_filter = ('is_admin', 'is_active',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('username', )}),
-        (_('Permissions'), {'fields': ('is_active', 'is_admin',)}),
+        (_('개인정보'), {'fields': ('email', 'password', 'username', 'profile_img',)}),
+        (_('권한'), {'fields': ('is_active', 'is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -34,6 +33,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email', 'username')
     ordering = ('-date_joined',)
     filter_horizontal = ()
+    readonly_fields = ('email',)
 
 
 # Now register the new UserAdmin...

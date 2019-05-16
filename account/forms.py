@@ -106,14 +106,23 @@ class UserCreationForm(forms.ModelForm):
 
 
 class UserChangeForm(forms.ModelForm):
-    # 비밀번호 변경 폼
+    # 사용자 변경 폼
+    email = forms.EmailField(
+        label=_('이메일'),
+
+    )
+
     password = ReadOnlyPasswordHashField(
-        label=_('Password')
+        label=_('비밀번호')
+    )
+
+    profile_img = forms.ImageField(
+        label=_('프로필 이미지')
     )
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'is_active', 'is_admin')
+        fields = ('email', 'password', 'profile_img', 'is_active', 'is_admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
