@@ -36,10 +36,6 @@ class TripInfo(models.Model):
         auto_now=True,
     )
 
-    page_cnt = models.PositiveSmallIntegerField(
-        verbose_name=_('페이지 수'),
-    )
-
     main_img = models.ImageField(
         verbose_name=_('메인 이미지'),
         upload_to=trip_info_img_path,
@@ -63,6 +59,9 @@ class TripInfo(models.Model):
         related_name='trip_info_set',
         verbose_name=_('해시 태그'),
     )
+
+    def __str__(self):
+        return self.title
 
     def save(self, *args, **kwargs):
         if self.id is None and self.main_img is not None:

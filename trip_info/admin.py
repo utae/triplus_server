@@ -13,17 +13,17 @@ class TripInfoCommentInline(admin.TabularInline):
 
 @admin.register(TripInfo)
 class TripInfoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'author', 'created_at', 'last_modified_at', 'page_cnt', 'main_img',)
+    list_display = ('id', 'title', 'author', 'created_at', 'last_modified_at', 'main_img',)
     list_display_links = ('id', 'title',)
     list_filter = ('id', 'created_at',)
     search_fields = ('title', 'author',)
     fieldsets = (
-        (_('게시물 정보'), {'fields': ('title', 'author', 'created_at', 'last_modified_at', 'page_cnt', 'main_img', 'hash_tag_set',)}),
+        (_('게시물 정보'), {'fields': ('title', 'author', 'created_at', 'last_modified_at', 'main_img', 'hash_tag_set',)}),
         (_('유저 반응'), {'fields': ('like_user_set',)}),
     )
     ordering = ('-id',)
     filter_horizontal = ()
-    readonly_fields = ('created_at', 'last_modified_at', 'page_cnt')
+    readonly_fields = ('created_at', 'last_modified_at', )
     inlines = (TripInfoDetailInline, TripInfoCommentInline, )
 
 
