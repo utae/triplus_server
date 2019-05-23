@@ -20,3 +20,5 @@ DATABASES = {
         },
     }
 }
+
+ACCOUNT_EMAIL_MAX_LENGTH = 191
