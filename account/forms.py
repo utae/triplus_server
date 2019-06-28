@@ -109,7 +109,7 @@ class UserChangeForm(forms.ModelForm):
     # 사용자 변경 폼
     email = forms.EmailField(
         label=_('이메일'),
-
+        disabled=True,
     )
 
     password = ReadOnlyPasswordHashField(

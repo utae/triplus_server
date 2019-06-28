@@ -33,7 +33,6 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email', 'username')
     ordering = ('-date_joined',)
     filter_horizontal = ()
-    readonly_fields = ('email',)
 
 
 # Now register the new UserAdmin...

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+from city.models import City
 from hash_tag.models import HashTag
 
 
@@ -26,6 +27,12 @@ class TripInfo(models.Model):
         verbose_name=_('작성자'),
     )
 
+    city = models.ForeignKey(
+        City,
+        on_delete=models.CASCADE,
+        verbose_name=_('도시'),
+    )
+
     created_at = models.DateTimeField(
         verbose_name=_('작성시간'),
         auto_now_add=True,
@@ -45,6 +52,7 @@ class TripInfo(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='like_trip_info_set',
         verbose_name=_('좋아요 유저'),
+        blank=True,
     )
 
     comment_user_set = models.ManyToManyField(
@@ -52,11 +60,12 @@ class TripInfo(models.Model):
         related_name='comment_trip_info_set',
         through="TripInfoComment",
         verbose_name=_('댓글 유저'),
+        blank=True,
     )
 
     hash_tag_set = models.ManyToManyField(
         HashTag,
-        related_name='trip_info_set',
+        related_name='trip_info_hash_tag_set',
         verbose_name=_('해시 태그'),
     )
 
@@ -80,13 +89,13 @@ class TripInfoDetail(models.Model):
         verbose_name=_('원게시물')
     )
 
-    text = models.TextField(
-        verbose_name=_('내용'),
-    )
-
     image = models.ImageField(
         verbose_name=_('이미지'),
         upload_to=trip_info_detail_img_path,
+    )
+
+    text = models.TextField(
+        verbose_name=_('내용'),
     )
 
 

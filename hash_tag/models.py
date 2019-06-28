@@ -8,3 +8,6 @@ class HashTag(models.Model):
         max_length=50,
         verbose_name=_('태그 이름'),
     )
+
+    def __str__(self):
+        return self.name

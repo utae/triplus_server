@@ -6,11 +6,8 @@ from rest_framework import serializers
 UserModel = get_user_model()
 
 
-class UserDetailsSerializer(serializers.ModelSerializer):
-    """
-    User model w/o password
-    """
+class UserDetailSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = UserModel
         fields = ('id', 'email', 'username',)
-        read_only_fields = ('email', )
