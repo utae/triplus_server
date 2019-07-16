@@ -69,7 +69,9 @@ PROJECT_APPS = [
     'account.apps.AccountConfig',
     'trip_info',
     'hash_tag',
-    'city'
+    'city',
+    'guide',
+    'trip_package',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
@@ -150,7 +152,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'triplus_user.User'
 
