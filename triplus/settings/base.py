@@ -69,7 +69,9 @@ PROJECT_APPS = [
     'account.apps.AccountConfig',
     'trip_info',
     'hash_tag',
-    'city'
+    'city',
+    'guide',
+    'trip_package',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
