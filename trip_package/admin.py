@@ -5,14 +5,19 @@ from django.utils.translation import ugettext_lazy as _
 
 class TripPackageMainImgInline(admin.TabularInline):
     model = TripPackageMainImg
+    extra = 0
+    min_num = 1
 
 
 class TripPackageDetailInline(admin.TabularInline):
     model = TripPackageDetail
+    extra = 0
+    min_num = 1
 
 
 class TripPackageAdditionInline(admin.TabularInline):
     model = TripPackageAddition
+    extra = 0
 
 
 class TripPackageReviewInline(admin.TabularInline):

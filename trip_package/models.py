@@ -34,7 +34,7 @@ class TripPackage(models.Model):
     )
 
     sub_title = models.CharField(
-        verbose_name=_('제목'),
+        verbose_name=_('부제'),
         max_length=100,
     )
 
