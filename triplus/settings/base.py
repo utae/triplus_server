@@ -63,6 +63,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'rest_auth',
     'rest_auth.registration',
+    'storages',
 ]
 
 PROJECT_APPS = [
