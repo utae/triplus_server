@@ -33,12 +33,14 @@ AWS_S3_HOST = 's3.%s.amazonaws.com' % AWS_REGION
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 # Static Setting
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_LOCATION = 'static'
+STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+STATICFILES_STORAGE = 'triplus.settings.custom_storages.StaticStorage'
 
 # Media Setting
-MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'triplus.settings.custom_storages.MediaStorage'
 
 # Root Setting
 # STATIC_ROOT = '%s/static' % STORAGE_PATH
