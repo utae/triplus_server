@@ -10,4 +10,11 @@ class UserDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ('id', 'email', 'username',)
+        fields = '__all__'
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserModel
+        fields = ('id', 'username', 'profile_img',)
