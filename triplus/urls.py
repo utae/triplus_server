@@ -15,18 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from django.conf import settings
 from django.conf.urls.static import static
 
+from .api_document import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('api/v1/swagger<str:format>', schema_view_v1.without_ui(cache_timeout=0), name='schema-json'),
+    path('api/v1/swagger/', schema_view_v1.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api/v1/docs/', schema_view_v1.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     path('rest-auth/', include('rest_auth.urls')),
     path('accounts/', include('allauth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
 
-    path('api/1.0/auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/1.0/trip_info/', include('trip_info.urls')),
-    path('api/1.0/city/', include('city.urls')),
-] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('api/v1/auth/', include('rest_framework.urls')),
+    path('api/v1/trip_info/', include('trip_info.urls')),
+    path('api/v1/city/', include('city.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
