@@ -46,6 +46,7 @@ class TripInfo(models.Model):
     main_img = models.ImageField(
         verbose_name=_('메인 이미지'),
         upload_to=trip_info_img_path,
+
     )
 
     like_user_set = models.ManyToManyField(
