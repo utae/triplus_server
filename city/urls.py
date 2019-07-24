@@ -1,12 +1,11 @@
-from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 from .views import CityView
 
-city_list = CityView.as_view({
-    'get': 'list',
-})
+router = DefaultRouter()
+router.register('', CityView)
 
-urlpatterns = format_suffix_patterns([
-    path('', city_list, name='trip_info_list'),
-])
+urlpatterns = [
+    path('', include(router.urls)),
+]
