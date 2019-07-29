@@ -34,4 +34,5 @@ urlpatterns = [
     path('api/v1/auth/', include('rest_framework.urls')),
     path('api/v1/trip_info/', include('trip_info.urls')),
     path('api/v1/city/', include('city.urls')),
+    path('api/v1/trip_package/', include('trip_package.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

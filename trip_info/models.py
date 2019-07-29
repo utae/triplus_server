@@ -51,14 +51,14 @@ class TripInfo(models.Model):
 
     like_user_set = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name='like_trip_info_set',
+        related_name='like_trip_info',
         verbose_name=_('좋아요 유저'),
         blank=True,
     )
 
     comment_user_set = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name='comment_trip_info_set',
+        related_name='trip_info_comment',
         through="TripInfoComment",
         verbose_name=_('댓글 유저'),
         blank=True,
@@ -66,7 +66,7 @@ class TripInfo(models.Model):
 
     hash_tag_set = models.ManyToManyField(
         HashTag,
-        related_name='trip_info_hash_tag_set',
+        related_name='trip_info',
         verbose_name=_('해시 태그'),
     )
 
@@ -87,7 +87,8 @@ class TripInfoDetail(models.Model):
     trip_info = models.ForeignKey(
         TripInfo,
         on_delete=models.CASCADE,
-        verbose_name=_('원게시물')
+        verbose_name=_('원게시물'),
+        related_name='detail'
     )
 
     image = models.ImageField(
